@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragments_main"
+    app:startDestination="@id/gamesFragment">
+
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.tohed.islampro.ui.fragments.PostsFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games">
+        <action
+            android:id="@+id/action_gamesFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updatesFragment"
+        android:name="com.tohed.islampro.ui.fragments.UpdatesFragment"
+        android:label="fragment_updates"
+        tools:layout="@layout/fragment_updates" />
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.tohed.islampro.ui.fragments.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category">
+    <action
+        android:id="@+id/action_categoryFragment_to_categoryDetailFragment"
+        app:destination="@id/categoryDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="com.tohed.islampro.ui.fragments.CategoryDetailFragment"
+        android:label="fragment_category_detail"
+        tools:layout="@layout/fragment_category_detail"/>
+    <fragment
+        android:id="@+id/leaguesFragment"
+        android:name="com.tohed.islampro.ui.fragments.LeaguesFragment"
+        android:label="fragment_leagues"
+        tools:layout="@layout/fragment_leagues" />
+
+    <fragment
+        android:id="@+id/ihmMozuatFragment"
+        android:name="com.tohed.islampro.ui.fragments.IhmMozuat"
+        android:label="fragment_ihm_mozuat"
+        tools:layout="@layout/fragment_ihm_mozuat" />
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.tohed.islampro.PostDetailsFragment"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details" />
+
+</navigation>

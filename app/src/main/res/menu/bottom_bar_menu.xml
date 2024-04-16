@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/gamesFragment"
+        android:iconTint="@color/white"
+        android:icon="@drawable/baseline_article_24"
+        android:title="@string/taza_mazamen_tab_title_urdu"
+        android:actionLayout="@layout/custom_bottom_nav_item"
+        android:titleTextColor="@color/white"
+        app:cnb_backgroundColor="@color/grey_white"
+        app:cnb_iconColor="@color/white" />
+
+    <item
+        android:id="@+id/updatesFragment"
+        android:iconTint="@color/white"
+        android:icon="@drawable/baseline_article_24"
+        android:title="@string/mashoor_mazameen_tab_title_urdu"
+        android:titleTextColor="@color/white"
+        app:cnb_backgroundColor="@color/grey_white"
+        app:cnb_iconColor="@color/white" />
+
+    <item
+        android:id="@+id/favouritesFragment"
+        android:iconTint="@color/white"
+        android:icon="@drawable/baseline_article_24"
+        android:title="@string/ihm_mozuat_tab_title_urdu"
+        android:titleTextColor="@color/white"
+        app:cnb_backgroundColor="@color/grey_white"
+        app:cnb_iconColor="@color/white" />
+
+    <item
+        android:id="@+id/leaguesFragment"
+        android:iconTint="@color/white"
+        android:icon="@drawable/baseline_article_24"
+        android:title="@string/diger_zumry_tab_title_urdu"
+        app:cnb_backgroundColor="@color/grey_white"
+        app:cnb_iconColor="@color/white" />
+
+
+</menu>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavTextStyle">
+        <!-- Specify the desired font family, size, style, etc. -->
+        <item name="android:fontFamily">@font/jameel_noori_nastaleeq</item> <!-- Specify your custom font -->
+        <item name="android:textSize">12sp</item> <!-- Specify the text size -->
+        <!-- Add other attributes as needed -->
+    </style>
+
+</resources>
