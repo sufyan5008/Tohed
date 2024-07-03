@@ -53,15 +53,29 @@
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
-                    <!-- Your Card Content Here -->
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/jameel_noori_nastaleeq"
-                        android:gravity="center"
-                        android:text="مسنون نماز"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/nimaz_ic" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/jameel_noori_nastaleeq"
+                            android:gravity="center"
+                            android:text="مسنون نماز"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Second Card -->
@@ -75,6 +89,19 @@
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/tohed_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
@@ -84,7 +111,7 @@
                         android:text="توحید و عقائد"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -106,15 +133,29 @@
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/qabr_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
                         android:text="قبروں سے متعلق"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Second Card -->
@@ -128,16 +169,29 @@
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/khawaten_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
                         android:text="گوشہ خواتین"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -159,15 +213,29 @@
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/itbah_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="وسیلہ"
+                        android:text="اتباع سنت و ترک بدعات"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Second Card -->
@@ -180,17 +248,29 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ihkaam_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="رفع یدین"
+                        android:text="احکام ومسائل"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -211,16 +291,29 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ikhlaq_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="تقلید"
+                        android:text="حسن اخلاق معاشرت"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Second Card -->
@@ -233,17 +326,29 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/zakat_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="درود"
+                        android:text="زکوة و صدقات"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
@@ -264,16 +369,29 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hajj_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="اہل جاہلیت کےعقائد"
+                        android:text="حج و عمرہ"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <!-- Second Card -->
@@ -286,17 +404,29 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/roza_ic" />
                     <!-- Your Card Content Here -->
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/jameel_noori_nastaleeq"
                         android:gravity="center"
-                        android:text="غیر ثابت مسائل"
+                        android:text="روزوں کے احکام"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>

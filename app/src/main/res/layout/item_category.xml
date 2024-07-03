@@ -7,7 +7,7 @@
     android:layout_margin="8dp">
 
     <TextView
-        android:id="@+id/textCategoryName"
+        android:id="@+id/cat_Title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jameel_noori_nastaleeq"

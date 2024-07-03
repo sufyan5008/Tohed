@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="icon_tint">#e4c260</color>
+    <color name="card_border">#954B14</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_dark">#403EF1</color>
     <color name="off_white">#FAFAFA</color>
     <color name="gray">#979696</color>
     <color name="lite_parrot">#ECFE95</color>
-    <color name="grey_white">#854B1D</color>
+    <color name="grey_white">#E2BF5F</color>
     <color name="parrot">#ECFE95</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

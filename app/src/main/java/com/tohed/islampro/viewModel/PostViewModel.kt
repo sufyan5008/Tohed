@@ -1,18 +1,17 @@
 package com.tohed.islampro.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tohed.islampro.api.PostApiService
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.repository.PostRepository
 import kotlinx.coroutines.launch
 
+class PostViewModel(application: Application) : AndroidViewModel(application) {
 
-class PostViewModel : ViewModel() {
-
-    private val postRepository = PostRepository()
+    private val postRepository = PostRepository(application)
 
     private val _postsLiveData = MutableLiveData<List<Post>>()
     val postsLiveData: LiveData<List<Post>>
@@ -25,14 +24,19 @@ class PostViewModel : ViewModel() {
     private var nextPage = 1
 
     fun fetchPosts() {
-        postRepository.getPosts(nextPage) { posts ->
+        viewModelScope.launch {
+            val posts = postRepository.getPosts(nextPage)
             _postsLiveData.postValue(posts)
             nextPage++
         }
     }
+
     fun fetchPostDetails(postId: Long) {
-        postRepository.getPostDetails(postId) { postDetails ->
+        viewModelScope.launch {
+            val postDetails = postRepository.getPostDetails(postId)
             _postDetailsLiveData.postValue(postDetails)
         }
     }
 }
+
+

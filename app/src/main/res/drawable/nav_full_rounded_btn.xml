@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:radius="8dp"/>
+    <gradient
+        android:startColor="@color/grey_white"
+        android:endColor="@color/grey_white"/>
+</shape>-->
+<!-- res/drawable/custom_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shape with rounded corners -->
+    <item>
+        <shape >
+            <corners android:radius="100dp" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <!-- Image -->
+    <item>
+        <bitmap android:src="@drawable/bottom_nav_bg" />
+    </item>
+</layer-list>

@@ -1,53 +1,167 @@
 package com.tohed.islampro.repository
 
+
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import androidx.room.Room
 import com.tohed.islampro.api.PostApiService
 import com.tohed.islampro.datamodel.Content
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.datamodel.Title
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.tohed.islampro.db.AppDatabase
+import com.tohed.islampro.db.PostEntity
+import com.tohed.islampro.db.toDomain
+import com.tohed.islampro.db.toEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class PostRepository {
-
+class PostRepository(private val context: Context) {
     private val postApiService = PostApiService.getService()
+    private val db = Room.databaseBuilder(
+        context.applicationContext,
+        AppDatabase::class.java, "post-database"
+    ).build()
 
-    fun getPosts(page: Int, callback: (List<Post>) -> Unit) {
-        postApiService.getPosts(page).enqueue(object : Callback<List<Post>> {
-            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                if (response.isSuccessful) {
-                    val posts = response.body()
-                    callback(posts ?: emptyList())
-                } else {
-                    // Handle error
-                }
+    /*suspend fun getPosts(page: Int): List<Post> = withContext(Dispatchers.IO) {
+        if (isOnline(context)) {
+            val response = postApiService.getPosts(page).execute()
+            if (response.isSuccessful) {
+                val posts = response.body() ?: emptyList()
+                db.postDao().insertPosts(posts.map { it.toEntity(0) }) // Assuming category ID 0 for all posts
+                posts
+            } else {
+                emptyList()
             }
+        } else {
+            db.postDao().getPostsByCategory(0).map { it.toDomain() }
+        }
+    }*/
 
-            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                // Handle failure
+    suspend fun getPosts(page: Int): List<Post> = withContext(Dispatchers.IO) {
+        val cachedPosts = db.postDao().getPostsByCategory(0).map { it.toDomain() }
+
+        if (isOnline(context)) {
+            val response = postApiService.getPosts(page).execute()
+            if (response.isSuccessful) {
+                val posts = response.body() ?: emptyList()
+                // Insert new posts into the local database
+                db.postDao().insertPosts(posts.map { it.toEntity(0) })
+                // Merge cached posts with the new posts
+                val allPosts = (cachedPosts + posts).distinctBy { it.id }
+                allPosts
+            } else {
+                cachedPosts
             }
-        })
+        } else {
+            cachedPosts
+        }
     }
 
+    suspend fun getPostsByCategory(categoryId: Int, page: Int): List<Post> = withContext(Dispatchers.IO) {
+        val cachedPosts = db.postDao().getPostsByCategory(categoryId).map { it.toDomain() }
 
-    fun getPostDetails(postId: Long, callback: (Post) -> Unit) {
-        val call = postApiService.getPostById(postId)
-        call.enqueue(object : Callback<Post> {
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
+        if (isOnline(context)) {
+            val response = postApiService.getPostsByCategory(categoryId, page).execute()
+            if (response.isSuccessful) {
+                val posts = response.body() ?: emptyList()
+                db.postDao().insertPosts(posts.map { it.toEntity(categoryId) })
+                val allPosts = (cachedPosts + posts).distinctBy { it.id }
+                allPosts
+            } else {
+                cachedPosts
+            }
+        } else {
+            cachedPosts
+        }
+    }
+
+    suspend fun getPostDetails(postId: Long): Post = withContext(Dispatchers.IO) {
+        if (isOnline(context)) {
+            val response = postApiService.getPostById(postId).execute()
+            if (response.isSuccessful) {
+                val post = response.body()
+                post?.let {
+                    db.postDao().insertPosts(listOf(it.toEntity(0))) // Assuming category ID 0 for all posts
+                }
+                post ?: Post(0, Title(""), "", Content("", ""))
+            } else {
+                Post(0, Title(""), "", Content("", ""))
+            }
+        } else {
+            db.postDao().getPostById(postId.toInt()).toDomain()
+        }
+    }
+
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+    }
+}
+/*    suspend fun getPosts(page: Int): List<Post> {
+        return withContext(Dispatchers.IO) {
+            if (isOnline(context)) {
+                val response = postApiService.getPosts(page).execute()
+                if (response.isSuccessful) {
+                    val posts = response.body() ?: emptyList()
+                    // Cache posts locally
+                    db.postDao().insertPosts(posts.map { it.toEntity() })
+                    posts
+                } else {
+                    emptyList()
+                }
+            } else {
+                db.postDao().getAllPosts().map { it.toDomain() }
+            }
+        }
+    }
+
+    suspend fun getPostDetails(postId: Long): Post {
+        return withContext(Dispatchers.IO) {
+            if (isOnline(context)) {
+                val response = postApiService.getPostById(postId).execute()
                 if (response.isSuccessful) {
                     val post = response.body()
-                    callback(post ?: Post(0, Title(""), "", Content("", html = ""))) // Assuming Post has a default constructor
+                    post?.let {
+                        // Cache post details locally
+                        db.postDao().insertPosts(listOf(it.toEntity()))
+                    }
+                    post ?: Post(0, Title(""), "", Content("", ""))
                 } else {
-                    // Handle API error
-                    callback(Post(0, Title(""), "", Content("", html = ""))) // Return default Post object
+                    Post(0, Title(""), "", Content("", ""))
                 }
+            } else {
+                db.postDao().getPostById(postId.toInt()).toDomain()
             }
+        }
+    }
 
-            override fun onFailure(call: Call<Post>, t: Throwable) {
-                // Handle network error
-                callback(Post(0, Title(""), "", Content("", html = ""))) // Return default Post object
-            }
-        })
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities != null &&
+                networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
 
+private fun Post.toEntity(): PostEntity {
+    return PostEntity(
+        id = this.id,
+        title = this.title.rendered,
+        date = this.date,
+        content = this.content.rendered
+    )
+}
+
+private fun PostEntity.toDomain(): Post {
+    return Post(
+        id = this.id,
+        title = Title(this.title),
+        date = this.date,
+        content = Content(this.content, "")
+    )
+}*/

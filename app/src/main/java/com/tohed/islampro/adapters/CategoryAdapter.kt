@@ -1,66 +1,43 @@
 package com.tohed.islampro.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tohed.islampro.R
-import com.tohed.islampro.datamodel.Category
+import com.tohed.islampro.databinding.UpdateViewBinding
+import com.tohed.islampro.datamodel.Post
 
-/*
-class CategoryAdapter(private var categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(
+    private var posts: List<Post>,
+    private val onItemClick: (Post) -> Unit
+) : RecyclerView.Adapter<CategoryAdapter.MatchView>() {
 
-    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val categoryNameTextView: TextView = itemView.findViewById(R.id.textCategoryName)
-
-       */
-/* fun bind(category: Category) {
-            categoryNameTextView.text = category.name
-        }*//*
-
+    inner class MatchView(val binding: UpdateViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(posts[position])
+                }
+            }
+        }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        return CategoryViewHolder(itemView)
-    }
-
-    */
-/*override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categories[position]
-        holder.bind(category)
-    }*//*
-
-
-    override fun getItemCount(): Int {
-        return categories.size
-    }
-
-    fun updateCategories(newCategories: List<Category>) {
-        categories = newCategories
-        notifyDataSetChanged()
-    }
-}
-*/
-
-
-/*class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.MatchView>() {
-
-    inner class MatchView(val binding: FavoriteBinding) :
-        RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchView {
-        val binding =
-            FavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MatchView(binding);
+        val binding = UpdateViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MatchView(binding)
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return posts.size
+    }
+
+    fun updatePosts(newPosts: List<Post>) {
+        posts = newPosts
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: MatchView, position: Int) {
-
+        val post = posts[position]
+        holder.binding.tvTitle.text = post.title.rendered
     }
-}*/
+}

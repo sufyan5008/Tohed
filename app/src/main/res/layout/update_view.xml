@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
-    app:cardBackgroundColor="@color/grey_white"
     android:layout_marginEnd="10dp"
     app:cardCornerRadius="13dp"
     app:contentPadding="20dp">
@@ -20,7 +19,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/baseline_article_24"
-            app:tint="@color/white" />
+            app:tint="#954B14" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,29 +30,32 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textSize="18sp"
                 android:fontFamily="@font/jameel_noori_nastaleeq"
-                android:text="بہنوئی غیر محرم ہے" />
+                android:text="بہنوئی غیر محرم ہے"
+                android:textColor="#954B14" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato"
-                android:visibility="gone"
                 android:text="Premier League"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvReadMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:fontFamily="@font/jameel_noori_nastaleeq"
             android:text="مزید"
-            android:layout_gravity="bottom"
             android:textColor="@color/blue_dark"
             android:textStyle="bold" />
 

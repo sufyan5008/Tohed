@@ -18,22 +18,30 @@
         android:id="@+id/updatesFragment"
         android:name="com.tohed.islampro.ui.fragments.UpdatesFragment"
         android:label="fragment_updates"
-        tools:layout="@layout/fragment_updates" />
+        tools:layout="@layout/fragment_updates">
+        <action
+            android:id="@+id/action_updatesFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.tohed.islampro.ui.fragments.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category">
-    <action
-        android:id="@+id/action_categoryFragment_to_categoryDetailFragment"
-        app:destination="@id/categoryDetailFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_categoryDetailFragment"
+            app:destination="@id/categoryDetailFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/categoryDetailFragment"
         android:name="com.tohed.islampro.ui.fragments.CategoryDetailFragment"
         android:label="fragment_category_detail"
-        tools:layout="@layout/fragment_category_detail"/>
+        tools:layout="@layout/fragment_category_detail">
+        <action
+            android:id="@+id/action_categoryDetailFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/leaguesFragment"
         android:name="com.tohed.islampro.ui.fragments.LeaguesFragment"

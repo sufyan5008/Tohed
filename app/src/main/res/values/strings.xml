@@ -14,7 +14,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
-    <string name="taza_mazamen_tab_title_urdu">تازہ ترین مضامین</string>
+    <string name="taza_mazamen_tab_title_urdu">نئے مضامین</string>
     <string name="mashoor_mazameen_tab_title_urdu">مشہور مضامین</string>
     <string name="ihm_mozuat_tab_title_urdu">اہم موضوعات</string>
     <string name="diger_zumry_tab_title_urdu">دیگر زمرے</string>

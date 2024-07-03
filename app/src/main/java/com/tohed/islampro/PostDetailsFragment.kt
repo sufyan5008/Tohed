@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.tohed.islampro.databinding.FragmentPostDetailsBinding
 import com.tohed.islampro.viewModel.PostViewModel
 
-// PostDetailsFragment.kt
 class PostDetailsFragment : Fragment() {
 
     private var postId: Long = 0
@@ -47,6 +46,7 @@ class PostDetailsFragment : Fragment() {
         // Observe post details LiveData
         postViewModel.postDetailsLiveData.observe(viewLifecycleOwner) { postDetails ->
             // Update UI with post details (e.g., title, content)
+            binding.progressBar.visibility = View.GONE
             postDetails?.let { post ->
 
                 binding.titleTextView.text = postDetails.title.rendered
@@ -61,8 +61,12 @@ class PostDetailsFragment : Fragment() {
                  //binding.contentTextView.text = postDetails.content.rendered
             }
         }
+        fetchPostDetails(postId)
+        //postViewModel.fetchPostDetails(postId)
+    }
 
-        // Fetch post details based on postId
+    private fun fetchPostDetails(postId: Long) {
+        binding.progressBar.visibility = View.VISIBLE
         postViewModel.fetchPostDetails(postId)
     }
     private fun wrapHtmlInCss(htmlContent: String): String {

@@ -56,4 +56,9 @@ class PostAdapter(private var posts: List<Post>, private val onItemClickListener
         posts = newPosts
         notifyDataSetChanged()
     }
+
+    fun clearPosts() {
+        posts = emptyList()
+        notifyDataSetChanged()
+    }
 }
