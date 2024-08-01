@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tohed.islampro.R
 import com.tohed.islampro.adapters.CategoryAdapter
@@ -94,15 +94,15 @@ class CategoryDetailFragment : Fragment() {
     }
 
     private fun handlePostItemClick(post: Post) {
-        val postId = post.id.toInt()
+        val postId = post.id.toLong()
         navigateToPostDetails(postId)
     }
 
-    private fun navigateToPostDetails(postId: Int) {
-        val args = Bundle()
-        args.putInt("postId", postId)
-        val navController = NavHostFragment.findNavController(this)
-        navController.navigate(R.id.action_categoryDetailFragment_to_postDetailsFragment, args)
+    private fun navigateToPostDetails(postId: Long) {
+        val args = Bundle().apply {
+            putLong("postId", postId)
+        }
+        findNavController().navigate(R.id.action_categoryDetailFragment_to_postDetailsFragment, args)
     }
 
     private fun showPosts(posts: List<Post>) {

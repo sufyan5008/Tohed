@@ -46,7 +46,11 @@
         android:id="@+id/leaguesFragment"
         android:name="com.tohed.islampro.ui.fragments.LeaguesFragment"
         android:label="fragment_leagues"
-        tools:layout="@layout/fragment_leagues" />
+        tools:layout="@layout/fragment_leagues">
+        <action
+            android:id="@+id/action_leagueFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/ihmMozuatFragment"

@@ -1,5 +1,7 @@
 package com.tohed.islampro.ui.fragments
 
+import android.app.ProgressDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +30,7 @@ class CategoryFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var binding: FragmentCategoryBinding
     private lateinit var apiService: PostApiService
-
+    private lateinit var progressDialog: ProgressDialog
     private val preFetchedPosts = mutableMapOf<Int, List<Post>>()
 
     override fun onCreateView(
@@ -43,38 +45,62 @@ class CategoryFragment : Fragment() {
         navController = Navigation.findNavController(view)
         apiService = PostApiService.getService()
 
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading...") // Set the message for the progress dialog
+        progressDialog.setCancelable(false) // Make it not cancelable
+
         setupClickListeners()
     }
 
     private fun setupClickListeners() {
         binding.masnoonNimaz.setOnClickListener {
+            progressDialog.show()
+           // binding.masnoonNimaz.setBackgroundColor(Color.GRAY)
             fetchSubcategoriesAndPosts(409)
         }
         binding.tohedAqaed.setOnClickListener {
+            progressDialog.show()
+
             fetchSubcategoriesAndPosts(407)
         }
         binding.qabar.setOnClickListener {
+            progressDialog.show()
+
             fetchSubcategoriesAndPosts(456)
         }
         binding.khwatin.setOnClickListener {
+            progressDialog.show()
+
             fetchSubcategoriesAndPosts(414)
         }
         binding.waseela.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(408)
         }
         binding.rafeYaden.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(460)
         }
         binding.taqled.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(449)
         }
         binding.drood.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(418)
         }
         binding.ahlJahlyat.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(419)
         }
         binding.gherSabitM.setOnClickListener {
+            progressDialog.show()
+
             fetchPostsByCategory(411)
         }
     }
@@ -84,6 +110,7 @@ class CategoryFragment : Fragment() {
     }
 
     private fun navigateToCategoryDetail(categoryId: Int, posts: List<Post>) {
+        progressDialog.dismiss()
         val bundle = bundleOf("categoryId" to categoryId, "posts" to posts.toTypedArray())
         navController.navigate(R.id.action_categoryFragment_to_categoryDetailFragment, bundle)
     }

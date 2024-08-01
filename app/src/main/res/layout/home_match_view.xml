@@ -26,7 +26,7 @@
             android:id="@+id/postTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jameel_noori_nastaleeq"
+            android:fontFamily="@font/mehr_urdu_font"
             android:textColor="#954B14"
             android:text="@string/app_name"
             android:textSize="18sp"

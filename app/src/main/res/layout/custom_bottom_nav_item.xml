@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
 
-        android:fontFamily="@font/jameel_noori_nastaleeq"
+        android:fontFamily="@font/mehr_urdu_font"
         android:textAppearance="@style/BottomNavTextStyle"
         android:text="@string/taza_mazamen_tab_title_urdu" />
 

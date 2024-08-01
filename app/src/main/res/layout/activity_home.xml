@@ -408,7 +408,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/taza_mazamen_tab_title_urdu"
                         android:textSize="12sp"
-                        android:fontFamily="@font/jameel_noori_nastaleeq"
+                        android:fontFamily="@font/mehr_urdu_font"
                         android:textColor="@color/white"/>
                 </LinearLayout>
 
@@ -436,7 +436,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/mashoor_mazameen_tab_title_urdu"
                         android:textSize="12sp"
-                        android:fontFamily="@font/jameel_noori_nastaleeq"
+                        android:fontFamily="@font/mehr_urdu_font"
                         android:textColor="@color/black"/>
                 </LinearLayout>
 
@@ -466,7 +466,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/ihm_mozuat_tab_title_urdu"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/jameel_noori_nastaleeq"
+                        android:fontFamily="@font/mehr_urdu_font"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -495,7 +495,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/diger_zumry_tab_title_urdu"
                         android:textSize="12sp"
-                        android:fontFamily="@font/jameel_noori_nastaleeq"
+                        android:fontFamily="@font/mehr_urdu_font"
                         android:textColor="@color/black"/>
                 </LinearLayout>
 

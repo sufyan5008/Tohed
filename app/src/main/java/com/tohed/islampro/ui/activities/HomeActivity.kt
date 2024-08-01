@@ -444,8 +444,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         requestLocationPermission()
         setUpNavigationControllerGraph()
-        setSlidingRootNav(savedInstanceState)
-        setOnClickListeners()
+        //setSlidingRootNav(savedInstanceState)
+        //setOnClickListeners()
 
         prayerNameTextView = findViewById(R.id.tvNimazName)
         prayerTimeTextView = findViewById(R.id.tvNimazTime)
@@ -730,7 +730,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         navController = navHostFragment.navController
     }
 
-    private fun setOnClickListeners() {
+    /*private fun setOnClickListeners() {
         binding.drawerOpenClose.setOnClickListener {
             if (slidingRootNav.isMenuClosed) {
                 slidingRootNav.openMenu()
@@ -738,9 +738,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                 slidingRootNav.closeMenu()
             }
         }
-    }
+    }*/
 
-    private fun setSlidingRootNav(savedInstanceState: Bundle?) {
+   /* private fun setSlidingRootNav(savedInstanceState: Bundle?) {
         slidingRootNav =
             SlidingRootNavBuilder(this).withMenuOpened(false).withSavedState(savedInstanceState)
                 .withGravity(SlideGravity.RIGHT).withMenuLayout(R.layout.drawer_content).inject()
@@ -748,7 +748,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         slidingRootNav.layout.findViewById<CardView>(R.id.setting).setOnClickListener {
             startActivity(SettingActivity.getIntent(this))
         }
-    }
+    }*/
 
     private fun setActiveColor(imageView: ImageView, textView: TextView) {
         textView.setTextColor(getColor(R.color.white))

@@ -16,6 +16,7 @@ interface PostDao {
 
     @Query("SELECT * FROM posts WHERE id = :postId")
     fun getPostById(postId: Int): PostEntity
+
 }
 /*@Dao
 interface PostDao {

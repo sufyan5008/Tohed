@@ -17,7 +17,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/jameel_noori_nastaleeq"
+            android:fontFamily="@font/mehr_urdu_font"
             android:text="@string/ihm_mozuat_tab_title_urdu"
             android:textColor="@color/black"
             android:textSize="20sp"

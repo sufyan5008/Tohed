@@ -10,7 +10,7 @@
         android:id="@+id/cat_Title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/jameel_noori_nastaleeq"
+        android:fontFamily="@font/mehr_urdu_font"
         android:textSize="18sp"
         android:padding="16dp"/>
 
