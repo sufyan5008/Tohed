@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.tohed.islampro.datamodel.Category
 import com.tohed.islampro.datamodel.Content
+import com.tohed.islampro.datamodel.Excerpt
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.datamodel.Title
 
@@ -13,6 +14,7 @@ data class PostEntity(
     val title: String,
     val date: String,
     val content: String,
+    val excerpt: String, // Add the excerpt field
     val categoryId: Int
 )
 fun Post.toEntity(categoryId: Int) = PostEntity(
@@ -20,6 +22,7 @@ fun Post.toEntity(categoryId: Int) = PostEntity(
     title = this.title.rendered,
     date = this.date,
     content = this.content.rendered,
+    excerpt = this.excerpt.rendered, // Convert the excerpt to a string
     categoryId = categoryId
 )
 
@@ -27,7 +30,10 @@ fun PostEntity.toDomain() = Post(
     id = this.id,
     title = Title(this.title),
     date = this.date,
-    content = Content(this.content, html = "")
+    content = Content(this.content, html = ""),
+    excerpt = Excerpt(this.excerpt) // Convert the excerpt back to the domain model
+
+
 )
 
 /*fun Category.toEntity() = CategoryEntity(

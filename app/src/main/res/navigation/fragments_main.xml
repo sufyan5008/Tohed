@@ -47,9 +47,12 @@
         android:name="com.tohed.islampro.ui.fragments.LeaguesFragment"
         android:label="fragment_leagues"
         tools:layout="@layout/fragment_leagues">
-        <action
+        <!--<action
             android:id="@+id/action_leagueFragment_to_postDetailsFragment"
-            app:destination="@id/postDetailsFragment"/>
+            app:destination="@id/postDetailsFragment"/>-->
+        <action
+            android:id="@+id/action_leaguesFragment_to_excerptFragment"
+            app:destination="@id/excerptFragment" />
     </fragment>
 
     <fragment
@@ -63,4 +66,15 @@
         android:label="fragment_post_details"
         tools:layout="@layout/fragment_post_details" />
 
+    <fragment
+        android:id="@+id/excerptFragment"
+        android:name="com.tohed.islampro.ui.fragments.ExcerptFragment"
+        android:label="ExcerptFragment" >
+        <action
+            android:id="@+id/action_excerptFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"/>
+        <argument
+            android:name="posts"
+            app:argType="com.tohed.islampro.datamodel.Post[]" />
+    </fragment>
 </navigation>

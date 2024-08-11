@@ -21,13 +21,29 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val postDetailsLiveData: LiveData<Post>
         get() = _postDetailsLiveData
 
-    private var nextPage = 1
+    private var currentPage = 1
+    private var isLoading = false
 
     fun fetchPosts() {
+        if (isLoading) return
+        isLoading = true
         viewModelScope.launch {
-            val posts = postRepository.getPosts(nextPage)
+            val posts = postRepository.getPosts(currentPage)
+            val currentPosts = _postsLiveData.value ?: emptyList()
             _postsLiveData.postValue(posts)
-            nextPage++
+            currentPage++
+            isLoading = false
+        }
+    }
+
+    fun fetchPostsByCategory(categoryId: Int) {
+        if (isLoading) return
+        isLoading = true
+        viewModelScope.launch {
+            val posts = postRepository.getPostsByCategory(categoryId, currentPage)
+            _postsLiveData.postValue(posts)
+            currentPage++
+            isLoading = false
         }
     }
 
@@ -36,6 +52,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             val postDetails = postRepository.getPostDetails(postId)
             _postDetailsLiveData.postValue(postDetails)
         }
+    }
+
+    fun resetPagination() {
+        currentPage = 1
+        _postsLiveData.value = emptyList()
     }
 }
 

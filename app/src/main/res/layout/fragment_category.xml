@@ -77,8 +77,7 @@
                         android:layout_gravity="center"
                         android:text="@string/ihm_mozuat_tab_title_urdu"
                         android:textColor="@color/white"
-                        android:textSize="25sp"
-                        android:textStyle="bold" />
+                        android:textSize="25sp"/>
 
                     <TextView
                         android:id="@+id/see_all"

@@ -369,196 +369,166 @@
         app:menu="@menu/bottom_bar_menu" />-->
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bt_cardV"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bt_cardV"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:cardElevation="@dimen/_15sdp"
-            android:layout_height="64dp"
-            android:layout_alignParentBottom="true">
-            <LinearLayout
-                android:id="@+id/bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/home_btn"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="7dp"
-                    android:gravity="center"
-                    android:background="@drawable/nav_full_rounded_btn">
-
-                    <ImageView
-                        android:id="@+id/homeImg"
-                        android:background="@null"
-                        android:src="@drawable/mashoor_m"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:id="@+id/homeTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/taza_mazamen_tab_title_urdu"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/mehr_urdu_font"
-                        android:textColor="@color/white"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/search_btn"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="7dp"
-                    android:gravity="center"
-                    android:background="@drawable/nav_full_rounded_btn"
-                    android:backgroundTint="@color/transparent">
-
-                    <ImageView
-                        android:id="@+id/greetingImg"
-                        android:background="@null"
-                        android:src="@drawable/mashoor_ic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp" />
-
-                    <TextView
-                        android:id="@+id/greetingTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mashoor_mazameen_tab_title_urdu"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/mehr_urdu_font"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/mutafariq_M"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="7dp"
-                    android:gravity="center"
-                    android:background="@drawable/nav_full_rounded_btn"
-                    android:backgroundTint="@color/transparent">
-                    <ImageView
-                        android:id="@+id/mutImg"
-                        android:background="@null"
-                        android:src="@drawable/ihm_ic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp" />
-
-                    <TextView
-                        android:id="@+id/mutTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/ihm_mozuat_tab_title_urdu"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/mehr_urdu_font"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/premium_btn"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="7dp"
-                    android:gravity="center"
-                    android:background="@drawable/nav_full_rounded_btn"
-                    android:backgroundTint="@color/transparent">
-
-                    <ImageView
-                        android:id="@+id/brandingImg"
-                        android:background="@null"
-                        android:src="@drawable/diger_ic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp" />
-
-                    <TextView
-                        android:id="@+id/brandingTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/diger_zumry_tab_title_urdu"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/mehr_urdu_font"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-                <!--<LinearLayout
-                    android:id="@+id/profile_btn"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="7dp"
-                    android:gravity="center"
-                    android:background="@drawable/nav_full_rounded_btn"
-                    android:backgroundTint="@color/transparent">
-
-                    <ImageView
-                        android:id="@+id/profileImg"
-                        android:background="@null"
-                        android:src="@drawable/nav_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/profileTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/profile"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/textColor"/>
-                </LinearLayout>-->
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!--<RelativeLayout
-            android:id="@+id/createBtn"
-            android:elevation="@dimen/_15sdp"
-            android:layout_above="@id/topBlurView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="-35dp"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/circle_drawable"
-            android:backgroundTint="#E3E3E3">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_margin="3dp"
+                android:id="@+id/home_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_full_rounded_btn"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.visticsolution.posterbanao.customview.ShapesImage
-                    android:id="@+id/createImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <ImageView
+                    android:id="@+id/homeImg"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:background="@null"
-                    android:src="@drawable/tools"
-                    app:shapeDrawable="@drawable/circle_drawable"/>
+                    android:src="@drawable/mashoor_m"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/homeTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:text="@string/taza_mazamen_tab_title_urdu"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/search_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_full_rounded_btn"
+                android:backgroundTint="@color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/greetingImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@null"
+                    android:src="@drawable/mashoor_ic" />
+
+                <TextView
+                    android:id="@+id/greetingTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:text="@string/mashoor_mazameen_tab_title_urdu"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/mutafariq_M"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_full_rounded_btn"
+                android:backgroundTint="@color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/mutImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@null"
+                    android:src="@drawable/ihm_ic" />
+
+                <TextView
+                    android:id="@+id/mutTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:text="@string/ihm_mozuat_tab_title_urdu"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-        </RelativeLayout>-->
+            <LinearLayout
+                android:id="@+id/premium_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/nav_full_rounded_btn"
+                android:backgroundTint="@color/transparent"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/brandingImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@null"
+                    android:src="@drawable/diger_ic" />
+
+                <TextView
+                    android:id="@+id/brandingTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:text="@string/diger_zumry_tab_title_urdu"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:id="@+id/profile_btn"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="7dp"
+                android:gravity="center"
+                android:background="@drawable/nav_full_rounded_btn"
+                android:backgroundTint="@color/transparent">
+
+                <ImageView
+                    android:id="@+id/profileImg"
+                    android:background="@null"
+                    android:src="@drawable/nav_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/profileTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/textColor"/>
+            </LinearLayout>-->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

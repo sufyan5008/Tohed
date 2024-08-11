@@ -62,12 +62,12 @@ class UpdatesFragment : Fragment() {
         fetchPostsByCategory(414)*/
         //updatesViewModel.fetchPostsByCategory(categoryId)
 
-        updatesViewModel.fetchPostsByCategory(414)
+        updatesViewModel.fetchPostsByCategory(504)
 
         networkReceiver = NetworkReceiver { isConnected ->
             if (isConnected) {
                 binding.progressBar.visibility = View.VISIBLE
-                updatesViewModel.syncPostsByCategory(414) // Sync with the server if connected
+                updatesViewModel.syncPostsByCategory(504) // Sync with the server if connected
             }
         }
 

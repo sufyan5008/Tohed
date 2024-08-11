@@ -8,20 +8,26 @@ data class Post(
     val id: Int,
     val title: Title,
     val date: String,
-    val content: Content
-    //val entity: String
+    val content: Content,
+    val excerpt: Excerpt // Adding the excerpt field
 
 ) : Parcelable
+
 
 @Parcelize
 data class Title(
     val rendered: String
 ) : Parcelable
+
 @Parcelize
 data class Content(
-    val rendered: String,
-    val html: String
+    val rendered: String, val html: String
 
+) : Parcelable
+
+@Parcelize
+data class Excerpt(
+    val rendered: String
 ) : Parcelable
 
 data class Category(

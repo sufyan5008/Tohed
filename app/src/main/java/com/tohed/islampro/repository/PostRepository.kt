@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import androidx.room.Room
 import com.tohed.islampro.api.PostApiService
 import com.tohed.islampro.datamodel.Content
+import com.tohed.islampro.datamodel.Excerpt
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.datamodel.Title
 import com.tohed.islampro.db.AppDatabase
@@ -84,9 +85,9 @@ class PostRepository(private val context: Context) {
                 post?.let {
                     db.postDao().insertPosts(listOf(it.toEntity(0))) // Assuming category ID 0 for all posts
                 }
-                post ?: Post(0, Title(""), "", Content("", ""))
+                post ?: Post(0, Title(""), "", Content("", ""), Excerpt(""))
             } else {
-                Post(0, Title(""), "", Content("", ""))
+                Post(0, Title(""), "", Content("", ""), Excerpt(""))
             }
         } else {
             db.postDao().getPostById(postId.toInt()).toDomain()
