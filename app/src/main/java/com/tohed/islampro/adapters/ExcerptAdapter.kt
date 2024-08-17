@@ -5,7 +5,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,8 @@ class ExcerptAdapter(
             titleTextView.text = post.title.rendered
 
             // Apply the custom font to the excerptTextView
-            val typeface = Typeface.createFromAsset(itemView.context.assets, "fonts/mehr_urdu_font.ttf")
+            val typeface =
+                Typeface.createFromAsset(itemView.context.assets, "fonts/mehr_urdu_font.ttf")
             excerptTextView.typeface = typeface
             excerptTextView.text = Html.fromHtml(post.excerpt.rendered)
 
@@ -36,8 +36,8 @@ class ExcerptAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExcerptViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_excerpt, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_excerpt, parent, false)
         return ExcerptViewHolder(itemView)
     }
 

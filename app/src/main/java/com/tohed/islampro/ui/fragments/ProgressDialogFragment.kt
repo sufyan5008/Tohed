@@ -21,7 +21,11 @@ class ProgressDialogFragment : DialogFragment() {
         // Make dialog non-cancelable
         dialog?.setCancelable(false)
         dialog?.setCanceledOnTouchOutside(false)
+
         // Set the width and height of the dialog
         dialog?.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        // Set the dialog's background to transparent
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 }

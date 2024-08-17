@@ -87,7 +87,6 @@ class PostDetailsFragment : Fragment() {
                     direction: rtl; 
                     text-align: right;
                 }
-                
                 .btahreer {
                     font-family: 'Mehr Urdu', serif;
                     color: #A52A2A; /* Black color for Urdu text */

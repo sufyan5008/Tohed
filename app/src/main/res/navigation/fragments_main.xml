@@ -47,12 +47,11 @@
         android:name="com.tohed.islampro.ui.fragments.LeaguesFragment"
         android:label="fragment_leagues"
         tools:layout="@layout/fragment_leagues">
-        <!--<action
-            android:id="@+id/action_leagueFragment_to_postDetailsFragment"
-            app:destination="@id/postDetailsFragment"/>-->
+
         <action
             android:id="@+id/action_leaguesFragment_to_excerptFragment"
-            app:destination="@id/excerptFragment" />
+            app:destination="@id/excerptFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
 
     <fragment
@@ -73,8 +72,8 @@
         <action
             android:id="@+id/action_excerptFragment_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment"/>
-        <argument
+        <!--<argument
             android:name="posts"
-            app:argType="com.tohed.islampro.datamodel.Post[]" />
+            app:argType="com.tohed.islampro.datamodel.Post[]" />-->
     </fragment>
 </navigation>

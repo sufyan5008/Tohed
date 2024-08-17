@@ -273,7 +273,7 @@
                 android:padding="8dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/waseela"
+                    android:id="@+id/itbaaSunnat"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"
@@ -309,7 +309,7 @@
 
                 <!-- Second Card -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/rafe_yaden"
+                    android:id="@+id/ahkamMasail"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"
@@ -352,7 +352,7 @@
                 android:padding="8dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/taqled"
+                    android:id="@+id/husnEIkhlaq"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"
@@ -387,7 +387,7 @@
 
                 <!-- Second Card -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/drood"
+                    android:id="@+id/zakatSadqat"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"
@@ -430,7 +430,7 @@
                 android:padding="8dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/ahl_jahlyat"
+                    android:id="@+id/hajjUmrah"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"
@@ -465,7 +465,7 @@
 
                 <!-- Second Card -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/gher_sabitM"
+                    android:id="@+id/rozonAhkam"
                     android:layout_width="170dp"
                     android:layout_height="120dp"
                     android:layout_rowSpan="2"

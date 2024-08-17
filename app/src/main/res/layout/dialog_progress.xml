@@ -17,11 +17,11 @@
         android:id="@+id/loadingMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:textAlignment="center"
+        android:fontFamily="@font/mehr_urdu_font"
         android:layout_gravity="center"
-        android:text="Please wait, posts are loading..."
+        android:text=" براہ مہربانی! انتظارکریں ڈیٹا لوڈ ہو رہا ہے..."
         android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textSize="17sp" />
 
 </LinearLayout>

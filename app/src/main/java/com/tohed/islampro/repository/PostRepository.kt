@@ -59,7 +59,7 @@ class PostRepository(private val context: Context) {
         }
     }
 
-    suspend fun getPostsByCategory(categoryId: Int, page: Int): List<Post> = withContext(Dispatchers.IO) {
+    /*suspend fun getPostsByCategory(categoryId: Int, page: Int): List<Post> = withContext(Dispatchers.IO) {
         val cachedPosts = db.postDao().getPostsByCategory(categoryId).map { it.toDomain() }
 
         if (isOnline(context)) {
@@ -74,6 +74,28 @@ class PostRepository(private val context: Context) {
             }
         } else {
             cachedPosts
+        }
+    }*/
+    suspend fun getPostsByCategory(categoryId: Int, page: Int): List<Post> = withContext(Dispatchers.IO) {
+        val cachedPosts = db.postDao().getPostsByCategory(categoryId).map { it.toDomain() }
+
+        if (cachedPosts.isNotEmpty()) {
+            // Return cached data immediately if available
+            return@withContext cachedPosts
+        }
+
+        // Attempt to fetch from the network
+        if (isOnline(context)) {
+            val response = postApiService.getPostsByCategory(categoryId, page).execute()
+            if (response.isSuccessful) {
+                val posts = response.body() ?: emptyList()
+                db.postDao().insertPosts(posts.map { it.toEntity(categoryId) })
+                posts
+            } else {
+                cachedPosts // Fallback to cached data
+            }
+        } else {
+            cachedPosts // Fallback to cached data
         }
     }
 
@@ -101,68 +123,3 @@ class PostRepository(private val context: Context) {
         return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
     }
 }
-/*    suspend fun getPosts(page: Int): List<Post> {
-        return withContext(Dispatchers.IO) {
-            if (isOnline(context)) {
-                val response = postApiService.getPosts(page).execute()
-                if (response.isSuccessful) {
-                    val posts = response.body() ?: emptyList()
-                    // Cache posts locally
-                    db.postDao().insertPosts(posts.map { it.toEntity() })
-                    posts
-                } else {
-                    emptyList()
-                }
-            } else {
-                db.postDao().getAllPosts().map { it.toDomain() }
-            }
-        }
-    }
-
-    suspend fun getPostDetails(postId: Long): Post {
-        return withContext(Dispatchers.IO) {
-            if (isOnline(context)) {
-                val response = postApiService.getPostById(postId).execute()
-                if (response.isSuccessful) {
-                    val post = response.body()
-                    post?.let {
-                        // Cache post details locally
-                        db.postDao().insertPosts(listOf(it.toEntity()))
-                    }
-                    post ?: Post(0, Title(""), "", Content("", ""))
-                } else {
-                    Post(0, Title(""), "", Content("", ""))
-                }
-            } else {
-                db.postDao().getPostById(postId.toInt()).toDomain()
-            }
-        }
-    }
-
-    private fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
-        return networkCapabilities != null &&
-                networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-    }
-}
-
-private fun Post.toEntity(): PostEntity {
-    return PostEntity(
-        id = this.id,
-        title = this.title.rendered,
-        date = this.date,
-        content = this.content.rendered
-    )
-}
-
-private fun PostEntity.toDomain(): Post {
-    return Post(
-        id = this.id,
-        title = Title(this.title),
-        date = this.date,
-        content = Content(this.content, "")
-    )
-}*/

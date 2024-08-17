@@ -1,5 +1,126 @@
 package com.tohed.islampro.ui.fragments
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tohed.islampro.R
+import com.tohed.islampro.adapters.CategoryAdapter
+import com.tohed.islampro.databinding.FragmentCategoryDetailBinding
+import com.tohed.islampro.datamodel.Post
+import com.tohed.islampro.viewModel.PostViewModel
+
+class CategoryDetailFragment : Fragment() {
+
+    private lateinit var binding: FragmentCategoryDetailBinding
+    private lateinit var categoryAdapter: CategoryAdapter
+    private val postViewModel: PostViewModel by viewModels()
+    private var categoryId: Int = -1
+    private lateinit var categoryTitle: String
+    private var hasLoadedData: Boolean = false
+    private var progressDialog: ProgressDialogFragment? = null
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCategoryDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            categoryId = it.getInt("categoryId", -1)
+            categoryTitle = it.getString("categoryTitle", "")
+            val posts = it.getParcelableArray("posts")?.map { it as Post } ?: emptyList()
+
+            // Set the category title
+            binding.root.findViewById<TextView>(R.id.categoryTitleTextView).text = categoryTitle
+
+            setupRecyclerView(posts)
+
+            // Check if data is already loaded
+            if (!hasLoadedData && categoryId != -1 && posts.isEmpty()) {
+                postViewModel.fetchPostsByCategory(categoryId)
+                hasLoadedData = true
+            }
+        }
+
+        setupObservers()
+    }
+
+    private fun setupRecyclerView(posts: List<Post>) {
+        categoryAdapter = CategoryAdapter(posts) { post ->
+            handlePostItemClick(post)
+        }
+
+        binding.postsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = categoryAdapter
+        }
+    }
+
+    private fun setupObservers() {
+        postViewModel.postsLiveData.observe(viewLifecycleOwner) { posts ->
+            if (postViewModel.loadingLiveData.value == true) {
+                return@observe
+            }
+            progressDialog?.dismiss()
+            if (posts.isNullOrEmpty()) {
+                showErrorMessage("No posts found")
+            } else {
+                showPosts(posts)
+            }
+        }
+
+        postViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            progressDialog?.dismiss()
+            showErrorMessage(error)
+        }
+
+        postViewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                progressDialog = ProgressDialogFragment()
+                progressDialog?.show(childFragmentManager, "loadingDialog")
+            } else {
+                progressDialog?.dismiss()
+            }
+        }
+    }
+
+    private fun handlePostItemClick(post: Post) {
+        val postId = post.id.toLong()
+        navigateToPostDetails(postId)
+    }
+
+    private fun navigateToPostDetails(postId: Long) {
+        val args = Bundle().apply {
+            putLong("postId", postId)
+        }
+        findNavController().navigate(R.id.action_categoryDetailFragment_to_postDetailsFragment, args)
+    }
+
+    private fun showPosts(posts: List<Post>) {
+        categoryAdapter.updatePosts(posts)
+    }
+
+    private fun showErrorMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+}
+
+
+/*
+package com.tohed.islampro.ui.fragments
+
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +144,6 @@ class CategoryDetailFragment : Fragment() {
     private lateinit var binding: FragmentCategoryDetailBinding
     private lateinit var apiService: PostApiService
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var progressDialog: ProgressDialog
     private var categoryId: Int = -1 // Default value, update it with the actual category ID
 
     override fun onCreateView(
@@ -42,9 +162,6 @@ class CategoryDetailFragment : Fragment() {
             setupRecyclerView(posts)
         }
         apiService = PostApiService.getService()
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog.setMessage("Loading posts...")
-        progressDialog.setCancelable(false)
 
         if (categoryAdapter.itemCount == 0) {
             fetchPosts(categoryId, 1)
@@ -64,12 +181,10 @@ class CategoryDetailFragment : Fragment() {
     }
 
     private fun fetchPosts(categoryId: Int, page: Int) {
-        progressDialog.show() // Show the progress dialog
 
         // Call your API service to fetch posts based on the categoryId
         apiService.getPostsByCategory(categoryId, page).enqueue(object : Callback<List<Post>> {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                progressDialog.dismiss() // Hide the progress dialog
 
                 if (response.isSuccessful) {
                     val posts = response.body()
@@ -86,7 +201,6 @@ class CategoryDetailFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                progressDialog.dismiss() // Hide the progress dialog
                 // Handle failure case
                 showErrorMessage("Network request failed: ${t.message}")
             }
@@ -112,4 +226,4 @@ class CategoryDetailFragment : Fragment() {
     private fun showErrorMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-}
+}*/

@@ -30,23 +30,18 @@ class ExcerptFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the posts from the arguments
+        // Retrieve the posts and title from the arguments
         arguments?.let {
             posts = it.getParcelableArray("posts") as Array<Post>
-            val categoryTitle = it.getString("categoryTitle") // Retrieve the title
-
-            binding.excerptTitleTV.text = categoryTitle // Set the title to the TextView
-
+            val categoryTitle = it.getString("categoryTitle")
+            binding.excerptTitleTV.text = categoryTitle
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = ExcerptAdapter(posts.toList()){ post ->
+        binding.recyclerView.adapter = ExcerptAdapter(posts.toList()) { post ->
             navigateToPostDetails(post.id.toLong())
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigateUp() // Navigate up in the back stack
-        }
     }
 
     private fun navigateToPostDetails(postId: Long) {

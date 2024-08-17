@@ -1,5 +1,126 @@
 package com.tohed.islampro.ui.fragments
 
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.tohed.islampro.R
+import com.tohed.islampro.databinding.FragmentCategoryBinding
+import com.tohed.islampro.viewModel.PostViewModel
+
+class CategoryFragment : Fragment() {
+
+    private lateinit var binding: FragmentCategoryBinding
+    private val postViewModel: PostViewModel by viewModels()
+    private var progressDialog: ProgressDialogFragment? = null
+    private var hasNavigatedToDetail: Boolean = false
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupClickListeners()
+        setupObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hasNavigatedToDetail = false
+
+        // Ensure the progress dialog is dismissed when coming back to this fragment
+        progressDialog?.dismiss()
+
+        // Reset loadingLiveData to avoid showing progress dialog again unnecessarily
+        //postViewModel.loadingLiveData.value = false
+    }
+
+
+    private fun setupClickListeners() {
+        binding.masnoonNimaz.setOnClickListener { onCategoryClick(409, "مسنون نماز") }
+        binding.tohedAqaed.setOnClickListener { onCategoryClick(407, "توحید و عقائد") }
+        binding.qabar.setOnClickListener { onCategoryClick(456, "قبروں سے متعلق") }
+        binding.khwatin.setOnClickListener { onCategoryClick(414, "گوشہ خواتین") }
+        binding.itbaaSunnat.setOnClickListener { onCategoryClick(410, "اتباع سنت و ترک بدعات") }
+        binding.ahkamMasail.setOnClickListener { onCategoryClick(413, "احکام ومسائل") }
+        binding.husnEIkhlaq.setOnClickListener { onCategoryClick(412, "حسن اخلاق معاشرت") }
+        binding.zakatSadqat.setOnClickListener { onCategoryClick(431, "زکوة و صدقات") }
+        binding.hajjUmrah.setOnClickListener { onCategoryClick(416, "حج و عمرہ") }
+        binding.rozonAhkam.setOnClickListener { onCategoryClick(415, "روزوں کے احکام") }
+    }
+
+    private fun onCategoryClick(categoryId: Int, categoryTitle: String) {
+        postViewModel.currentCategoryTitle = categoryTitle
+
+        if (postViewModel.loadingLiveData.value == true) {
+            return  // Prevent showing the progress dialog again if already loading.
+        }
+
+        //showProgressDialog()
+
+        // Fetch posts by the selected category ID
+        postViewModel.fetchPostsByCategory(categoryId)
+    }
+
+    private fun setupObservers() {
+        postViewModel.postsLiveData.observe(viewLifecycleOwner) { posts ->
+            if (postViewModel.loadingLiveData.value == true || hasNavigatedToDetail) {
+                return@observe
+            }
+
+            progressDialog?.dismiss()
+
+            if (posts.isNullOrEmpty()) {
+                Toast.makeText(context, "No posts found", Toast.LENGTH_SHORT).show()
+            } else {
+                val bundle = Bundle().apply {
+                    putParcelableArray("posts", posts.toTypedArray())
+                    putString("categoryTitle", postViewModel.currentCategoryTitle)
+                }
+                hasNavigatedToDetail = true
+                findNavController().navigate(
+                    R.id.action_categoryFragment_to_categoryDetailFragment, bundle
+                )
+            }
+        }
+
+        postViewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
+            Log.d("CategoryFragment", "Loading state changed: $isLoading")
+            if (isLoading && !hasNavigatedToDetail) {
+                showProgressDialog()
+            } else {
+                progressDialog?.dismiss()
+            }
+        }
+
+        postViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            progressDialog?.dismiss()
+            Toast . makeText (context, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showProgressDialog() {
+        if (progressDialog == null || progressDialog?.isAdded == false) {
+            progressDialog = ProgressDialogFragment()
+            progressDialog?.show(childFragmentManager, "loadingDialog")
+        }
+    }
+}
+
+
+/*
+package com.tohed.islampro.ui.fragments
+
 import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -66,42 +187,42 @@ class CategoryFragment : Fragment() {
         binding.qabar.setOnClickListener {
             progressDialog.show()
 
-            fetchSubcategoriesAndPosts(456)
+            fetchPostsByCategory(456)
         }
         binding.khwatin.setOnClickListener {
             progressDialog.show()
 
             fetchSubcategoriesAndPosts(414)
         }
-        binding.waseela.setOnClickListener {
+        binding.itbaaSunnat.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(408)
+            fetchPostsByCategory(410)
         }
-        binding.rafeYaden.setOnClickListener {
+        binding.ahkamMasail.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(460)
+            fetchPostsByCategory(413)
         }
-        binding.taqled.setOnClickListener {
+        binding.husnEIkhlaq.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(449)
+            fetchPostsByCategory(412)
         }
-        binding.drood.setOnClickListener {
+        binding.zakatSadqat.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(418)
+            fetchPostsByCategory(431)
         }
-        binding.ahlJahlyat.setOnClickListener {
+        binding.hajjUmrah.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(419)
+            fetchPostsByCategory(416)
         }
-        binding.gherSabitM.setOnClickListener {
+        binding.rozonAhkam.setOnClickListener {
             progressDialog.show()
 
-            fetchPostsByCategory(411)
+            fetchPostsByCategory(415)
         }
     }
 
@@ -220,3 +341,4 @@ class CategoryFragment : Fragment() {
         return format.parse(dateString) ?: Date(0)
     }
 }
+*/

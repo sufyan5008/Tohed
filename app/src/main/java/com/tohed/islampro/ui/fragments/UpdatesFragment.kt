@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tohed.islampro.R
 import com.tohed.islampro.adapters.UpdatesAdapter
 import com.tohed.islampro.api.PostApiService
@@ -17,9 +18,6 @@ import com.tohed.islampro.databinding.FragmentUpdatesBinding
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.utils.NetworkReceiver
 import com.tohed.islampro.viewModel.UpdatesViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UpdatesFragment : Fragment() {
 
@@ -28,14 +26,13 @@ class UpdatesFragment : Fragment() {
     private lateinit var updatesViewModel: UpdatesViewModel
     private lateinit var updatesAdapter: UpdatesAdapter
     private lateinit var networkReceiver: NetworkReceiver
-
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentUpdatesBinding.inflate(inflater, container, false)
-        return binding.root;
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,24 +43,6 @@ class UpdatesFragment : Fragment() {
             handlePostItemClick(clickedPost)
         }
 
-        binding.updatesList.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = updatesAdapter
-        }
-
-        updatesViewModel.postsLiveData.observe(viewLifecycleOwner) { posts ->
-            binding.progressBar.visibility = View.GONE
-            updatesAdapter.updatePosts(posts)
-        }
-
-        /*apiService = PostApiService.getService()
-
-        // Fetch posts from category ID 444
-        fetchPostsByCategory(414)*/
-        //updatesViewModel.fetchPostsByCategory(categoryId)
-
-        updatesViewModel.fetchPostsByCategory(504)
-
         networkReceiver = NetworkReceiver { isConnected ->
             if (isConnected) {
                 binding.progressBar.visibility = View.VISIBLE
@@ -73,6 +52,53 @@ class UpdatesFragment : Fragment() {
 
         val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         requireContext().registerReceiver(networkReceiver, intentFilter)
+
+
+        binding.updatesList.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = updatesAdapter
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val visibleItemCount = layoutManager?.childCount ?: 0
+                    val totalItemCount = layoutManager?.itemCount ?: 0
+                    val firstVisibleItemPosition = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                    // Check if the user is scrolling up
+                    if (dy < 0) {
+                        binding.seeAll.visibility = View.GONE
+                    }
+
+                    // Check if the user is scrolling down and is at the end of the list
+                    if (dy > 0 && (firstVisibleItemPosition + visibleItemCount) >= totalItemCount) {
+                        binding.seeAll.visibility = View.VISIBLE
+                    }
+                }
+            })
+        }
+
+        updatesViewModel.postsLiveData.observe(viewLifecycleOwner) { posts ->
+            binding.progressBar.visibility = View.GONE
+            updatesAdapter.updatePosts(posts)
+            binding.seeAll.visibility = View.GONE
+            isLoading = false
+        }
+
+        binding.seeAll.setOnClickListener {
+            fetchMorePosts()
+        }
+
+        fetchMorePosts() // Initial fetch
+    }
+
+    private fun fetchMorePosts() {
+        if (isLoading) return
+
+        binding.progressBar.visibility = View.VISIBLE
+        isLoading = true
+        updatesViewModel.fetchPostsByCategory(504) // Adjust the category ID as necessary
     }
 
     override fun onDestroyView() {
@@ -86,45 +112,10 @@ class UpdatesFragment : Fragment() {
     }
 
     private fun navigateToPostDetails(postId: Long) {
-        val args = Bundle()
-        args.putLong("postId", postId)
+        val args = Bundle().apply {
+            putLong("postId", postId)
+        }
         val navController = NavHostFragment.findNavController(this)
         navController.navigate(R.id.action_updatesFragment_to_postDetailsFragment, args)
     }
 }
-
-
-/*private fun fetchPostsByCategory(categoryId: Int) {
-    apiService.getPostsByCategory(categoryId, 1).enqueue(object : Callback<List<Post>> {
-        override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-            if (response.isSuccessful) {
-                val posts = response.body()
-                posts?.let {
-                    // Update RecyclerView with fetched posts
-                    val adapter = UpdatesAdapter(it) { post ->
-                        handlePostItemClick(post)
-                    }
-                    binding.updatesList.layoutManager = LinearLayoutManager(requireContext())
-                    binding.updatesList.adapter = adapter
-                }
-            } else {
-                // Handle error
-            }
-        }
-
-        override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-            // Handle failure
-        }
-    })
-}*/
-/*private fun handlePostItemClick(post: Post) {
-    val postId = post.id.toLong()
-    navigateToPostDetails(postId)
-}
-private fun navigateToPostDetails(postId: Long) {
-    val args = Bundle()
-    args.putLong("postId", postId)
-    val navController = NavHostFragment.findNavController(this)
-    navController.navigate(R.id.action_updatesFragment_to_postDetailsFragment, args)
-}
-}*/

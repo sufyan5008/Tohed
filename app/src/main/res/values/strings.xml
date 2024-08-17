@@ -18,4 +18,6 @@
     <string name="mashoor_mazameen_tab_title_urdu">مشہور مضامین</string>
     <string name="ihm_mozuat_tab_title_urdu">اہم موضوعات</string>
     <string name="diger_zumry_tab_title_urdu">دیگر زمرے</string>
+    <string name="loading">loading\n</string>
+    <string name="no_posts_found">no post found</string>
 </resources>
