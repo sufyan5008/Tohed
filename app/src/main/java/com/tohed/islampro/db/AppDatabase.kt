@@ -4,13 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.tohed.islampro.adapters.dao.PostDao
 
-@Database(entities = [PostEntity::class], version = 2)
-/*
-@TypeConverters(Converters::class)
-*/
+@Database(entities = [PostEntity::class, PageEntity::class], version = 2, exportSchema = false)
+
 abstract class AppDatabase : RoomDatabase() {
     abstract fun postDao(): PostDao
-   // abstract fun categoryDao(): CategoryDao
+
 
 }
 

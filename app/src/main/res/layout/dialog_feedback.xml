@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:minHeight="400dp"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    >
+
+    <!-- Close icon for the dialog -->
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_cancel_24"
+        android:contentDescription="Close" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:fontFamily="@font/mehr_urdu_font"
+        android:text="اپنی رائے دیں یا غلطی رپورٹ کریں"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
+    <!-- Body Text -->
+    <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mehr_urdu_font"
+        android:text="درج زیل فارم کے زریعے اپنی رائے دیں یا ہمارے کسی مضمون میں موجود غلطی کی اطلاع دیں۔"
+        android:layout_marginTop="8dp" />
+
+    <!-- EditText for user input -->
+    <EditText
+        android:id="@+id/etFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="اپنی رائے یا غلطی کی اطلاع درج کریں"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@drawable/edit_text_background"
+        android:minHeight="100dp" />
+
+    <!-- Container for screenshot name and close button -->
+    <LinearLayout
+        android:id="@+id/screenshotContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"> <!-- Initially hidden -->
+
+        <!-- TextView to show the screenshot name -->
+        <TextView
+            android:id="@+id/tvScreenshotName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Screenshot.png"
+            android:textSize="16sp"
+            android:paddingEnd="8dp" />
+
+        <!-- Close icon for removing the selected screenshot -->
+        <ImageView
+            android:id="@+id/ivRemoveScreenshot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_delete_24"
+            android:contentDescription="Remove Screenshot"
+            android:padding="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <!-- Plus icon for adding screenshot -->
+    <ImageView
+        android:id="@+id/ivAddScreenshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/baseline_add_circle_24"
+        android:contentDescription="Add Screenshot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/icon_tint"
+            android:text="اسکرین شاٹ منسلک کریں۔"/>
+    </LinearLayout>
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Submit"
+        android:backgroundTint="@color/card_border" />
+
+</LinearLayout>

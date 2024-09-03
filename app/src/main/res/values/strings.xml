@@ -20,4 +20,5 @@
     <string name="diger_zumry_tab_title_urdu">دیگر زمرے</string>
     <string name="loading">loading\n</string>
     <string name="no_posts_found">no post found</string>
+    <string name="error_loading_page">Error loading page</string>
 </resources>

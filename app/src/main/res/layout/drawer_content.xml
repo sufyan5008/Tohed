@@ -8,7 +8,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:background="@color/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
-        <!--<androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/aboutUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -53,32 +54,31 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/live" />
+                    android:src="@drawable/outline_groups_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/lato"
-                    android:text="Live"
+                    android:text="ہم کون ہیں؟"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>-->
+        </androidx.cardview.widget.CardView>
 
-
-        <!--<androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:clickable="true"
             android:elevation="10dp"
+            android:layout_marginTop="15dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
-            app:contentPadding="10dp">-->
+            app:contentPadding="10dp">
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|start"
@@ -89,22 +89,92 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/calendar" />
+                    android:src="@drawable/outline_notifications_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/lato"
-                    android:text="Calender"
+                    android:text="اطلاعات"
                     android:textSize="18dp"
                     android:textStyle="bold" />
-            </LinearLayout>-->
+            </LinearLayout>
 
-<!--
         </androidx.cardview.widget.CardView>
--->
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/WA_Support"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_perm_phone_msg_24"
+                    app:tint="#2D2D2D" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/lato"
+                    android:text="واٹس اپپ سپورٹ"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/outline_feedback_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/lato"
+                    android:text="اپنی رائے سے آگاہ کریں"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/setting"
@@ -128,14 +198,14 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/setting" />
+                    android:src="@drawable/outline_settings_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/lato"
-                    android:text="Setting"
+                    android:text="سیٹنگ"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -164,15 +234,14 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/star"
-                    app:tint="@color/black" />
+                    android:src="@drawable/outline_share_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/lato"
-                    android:text="Favorites"
+                    android:text="توحید کو پھیلائیں"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -200,15 +269,14 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/cup_trofy"
-                    app:tint="@color/black" />
+                    android:src="@drawable/outline_thumb_up_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/lato"
-                    android:text="Leagues"
+                    android:text="ہمیں فالو کریں"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 

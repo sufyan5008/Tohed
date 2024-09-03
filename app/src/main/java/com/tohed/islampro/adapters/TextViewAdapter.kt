@@ -37,4 +37,6 @@ class TextViewAdapter(
     override fun getItemCount(): Int {
         return texts.size
     }
+
+
 }

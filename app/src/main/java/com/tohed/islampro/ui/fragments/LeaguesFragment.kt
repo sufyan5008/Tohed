@@ -101,7 +101,7 @@ class LeaguesFragment : Fragment(), OnItemClickListener {
             progressDialog?.dismiss()
 
             if (posts.isNullOrEmpty()) {
-                Toast.makeText(context, "No posts found", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "No posts found", Toast.LENGTH_SHORT).show()
             } else {
                 val bundle = Bundle().apply {
                     putParcelableArray("posts", posts.toTypedArray())

@@ -12,6 +12,8 @@ import com.tohed.islampro.R
 import com.tohed.islampro.datamodel.Post
 
 class ExcerptAdapter(
+ //   private var posts: MutableList<Post>, // Changed to MutableList for dynamic updates
+
     private val posts: List<Post>,
     private val onItemClick: (Post) -> Unit // Click listener to handle item clicks
 ) : RecyclerView.Adapter<ExcerptAdapter.ExcerptViewHolder>() {
@@ -46,4 +48,10 @@ class ExcerptAdapter(
     }
 
     override fun getItemCount() = posts.size
+
+    /*fun updatePosts(newPosts: List<Post>) {
+        val previousSize = posts.size
+        posts.addAll(newPosts)
+        notifyItemRangeInserted(previousSize, newPosts.size)
+    }*/
 }

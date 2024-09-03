@@ -25,7 +25,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private var currentPage = 1
     private var isLoading = false
 
-    private var currentCategoryId: Int? = null
+    var currentCategoryId: Int? = null
     private val _errorLiveData = MutableLiveData<String>()
     val errorLiveData: LiveData<String>
         get() = _errorLiveData
@@ -46,21 +46,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+
     /*fun fetchPostsByCategory(categoryId: Int) {
         if (isLoading) return
         isLoading = true
-        viewModelScope.launch {
-            val posts = postRepository.getPostsByCategory(categoryId, currentPage)
-            _postsLiveData.postValue(posts)
-            currentPage++
-            isLoading = false
-        }
-    }*/
-    fun fetchPostsByCategory(categoryId: Int) {
-        if (isLoading) return
-        isLoading = true
 
-        _loadingLiveData.value = true // Set loading state to true when starting
 
         // Reset current category and pagination if a new category is selected
         if (currentCategoryId != categoryId) {
@@ -68,6 +58,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             currentPage = 1
             _postsLiveData.value = emptyList() // Clear the LiveData to reset the UI
         }
+        _loadingLiveData.value = true // Set loading state to true when starting
 
         viewModelScope.launch {
             try {
@@ -82,7 +73,36 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 _loadingLiveData.value = false // Set loading state to false after loading completes
             }
         }
+    }*/
+
+    fun fetchPostsByCategory(categoryId: Int) {
+        if (isLoading) return
+        isLoading = true
+
+        // Reset pagination and post list if a new category is selected
+        if (currentCategoryId != categoryId) {
+            currentCategoryId = categoryId
+            currentPage = 1
+            _postsLiveData.value = emptyList() // Clear existing posts
+        }
+
+        _loadingLiveData.value = true
+
+        viewModelScope.launch {
+            try {
+                val newPosts = postRepository.getPostsByCategory(categoryId, currentPage)
+                val currentPosts = _postsLiveData.value.orEmpty()
+                _postsLiveData.postValue(currentPosts + newPosts) // Append new posts to the existing list
+                currentPage++ // Increment page for next load
+            } catch (e: Exception) {
+                _errorLiveData.postValue("Error fetching posts: ${e.message}")
+            } finally {
+                isLoading = false
+                _loadingLiveData.value = false
+            }
+        }
     }
+
 
 
     fun fetchPostDetails(postId: Long) {

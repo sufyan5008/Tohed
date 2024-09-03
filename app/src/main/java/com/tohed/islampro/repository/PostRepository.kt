@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.tohed.islampro.api.PostApiService
 import com.tohed.islampro.datamodel.Content
 import com.tohed.islampro.datamodel.Excerpt
+import com.tohed.islampro.datamodel.Page
 import com.tohed.islampro.datamodel.Post
 import com.tohed.islampro.datamodel.Title
 import com.tohed.islampro.db.AppDatabase
@@ -22,7 +23,9 @@ class PostRepository(private val context: Context) {
     private val db = Room.databaseBuilder(
         context.applicationContext,
         AppDatabase::class.java, "post-database"
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     /*suspend fun getPosts(page: Int): List<Post> = withContext(Dispatchers.IO) {
         if (isOnline(context)) {
@@ -100,7 +103,7 @@ class PostRepository(private val context: Context) {
     }
 
     suspend fun getPostDetails(postId: Long): Post = withContext(Dispatchers.IO) {
-        if (isOnline(context)) {
+        (if (isOnline(context)) {
             val response = postApiService.getPostById(postId).execute()
             if (response.isSuccessful) {
                 val post = response.body()
@@ -112,7 +115,26 @@ class PostRepository(private val context: Context) {
                 Post(0, Title(""), "", Content("", ""), Excerpt(""))
             }
         } else {
-            db.postDao().getPostById(postId.toInt()).toDomain()
+            db.postDao().getPostById(postId.toInt())?.toDomain()
+        })!!
+    }
+
+    suspend fun getPageDetails(pageId: Long): Page? = withContext(Dispatchers.IO) {
+        if (isOnline(context)) {
+            val response = postApiService.getPageById(pageId).execute()
+            if (response.isSuccessful) {
+                val page = response.body()
+                page?.let {
+                    db.postDao().insertPage(it.toEntity())
+                }
+                page
+            } else {
+                // Return cached content in case of network error
+                db.postDao().getPageById(pageId.toInt())?.toDomain()
+            }
+        } else {
+            // Return cached content if offline
+            db.postDao().getPageById(pageId.toInt())?.toDomain()
         }
     }
 

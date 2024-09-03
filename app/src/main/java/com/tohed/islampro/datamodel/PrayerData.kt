@@ -3,6 +3,9 @@ package com.tohed.islampro.datamodel
 data class PrayerData(
     val timings: Timings,
     val date: DateData,
+    val hijriYear: String,  // Only the Islamic year
+    val hijriDay: String,   // Only the Hijri day
+    val gregorianDateWithWeekday: String,  // Gregorian date with the weekday
     val meta: MetaData
 )
 
