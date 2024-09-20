@@ -10,13 +10,16 @@ import com.tohed.islampro.datamodel.Post
 import java.text.SimpleDateFormat
 import java.util.Locale
 import com.tohed.islampro.R
+import java.text.ParseException
 
 class PostAdapter(private var posts: List<Post>, private val onItemClickListener: (Post) -> Unit) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()) // Adjust format as needed
 
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val postTitleTextView: TextView = itemView.findViewById(R.id.postTitleTextView)
         private val postDateTextView: TextView = itemView.findViewById(R.id.dateTextView)
+
 
         fun bind(post: Post) {
             postTitleTextView.text = post.title.rendered
@@ -32,7 +35,13 @@ class PostAdapter(private var posts: List<Post>, private val onItemClickListener
             return outputFormat.format(parsedDate!!)
         }
     }
-
+    private fun parseDate(dateString: String): Long? {
+        return try {
+            dateFormat.parse(dateString)?.time
+        } catch (e: ParseException) {
+            null
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.home_match_view, parent, false)
         return PostViewHolder(itemView)
@@ -47,12 +56,16 @@ class PostAdapter(private var posts: List<Post>, private val onItemClickListener
         return posts.size
     }
 
-    fun updatePosts(newPosts: List<Post>) {
+    /*fun updatePosts(newPosts: List<Post>) {
         val diffCallback = PostDiffCallback(posts, newPosts)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         posts = newPosts
         diffResult.dispatchUpdatesTo(this)
+    }*/
+    fun updatePosts(newPosts: List<Post>) {
+        posts = newPosts.sortedByDescending { parseDate(it.date) ?: Long.MIN_VALUE }
+        notifyDataSetChanged()
     }
 
     fun clearPosts() {

@@ -95,7 +95,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:text="مزید مضامین لوڈ کریں"
-            android:textColor="#3F51B5"
+            android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
             android:visibility="gone"

@@ -15,4 +15,10 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="CustomSearchView" parent="ThemeOverlay.AppCompat.Light">
+        <item name="queryBackground">@drawable/search_view_bg</item> <!-- Background with rounded corners -->
+        <item name="searchIcon">@drawable/ic_search_custom</item> <!-- Custom search icon -->
+        <item name="android:textColorHint">#B56576</item> <!-- Hint color (similar to the image) -->
+        <item name="android:textColor">#8B4513</item>
+    </style>
 </resources>

@@ -11,6 +11,10 @@ import kotlinx.coroutines.launch
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val _searchResultsLiveData = MutableLiveData<List<Post>>()
+    val searchResultsLiveData: LiveData<List<Post>> get() = _searchResultsLiveData
+
+
     private val postRepository = PostRepository(application)
     var currentCategoryTitle: String? = null
 
@@ -35,6 +39,35 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         get() = _loadingLiveData
 
     fun fetchPosts() {
+        if (isLoading) return  // Prevent multiple simultaneous loads
+        isLoading = true
+        _loadingLiveData.value = true
+
+        viewModelScope.launch {
+            try {
+                // Fetch new posts from repository
+                val newPosts = postRepository.getPosts(currentPage)
+
+                // Get the current list of posts from LiveData
+                val currentPosts = _postsLiveData.value.orEmpty()
+
+                // Append new posts and sort by date (latest first)
+                val updatedPosts = (currentPosts + newPosts).distinctBy { it.id }  // Avoid duplicates
+                    .sortedByDescending { post -> post.date }  // Sort by date in descending order
+
+                // Update LiveData with sorted posts
+                _postsLiveData.postValue(updatedPosts)
+
+                currentPage++  // Increment the page for future fetches
+            } catch (e: Exception) {
+                _errorLiveData.postValue("Error fetching posts: ${e.message}")
+            } finally {
+                isLoading = false
+                _loadingLiveData.value = false  // Hide loading indicator
+            }
+        }
+    }
+    /*fun fetchPosts() {
         if (isLoading) return
         isLoading = true
         viewModelScope.launch {
@@ -44,7 +77,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             currentPage++
             isLoading = false
         }
-    }
+    }*/
 
 
     /*fun fetchPostsByCategory(categoryId: Int) {
@@ -76,29 +109,38 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }*/
 
     fun fetchPostsByCategory(categoryId: Int) {
-        if (isLoading) return
+        if (isLoading) return  // Prevent multiple simultaneous loads
         isLoading = true
+        _loadingLiveData.value = true
 
-        // Reset pagination and post list if a new category is selected
+        // Reset pagination and posts if a new category is selected
         if (currentCategoryId != categoryId) {
             currentCategoryId = categoryId
             currentPage = 1
-            _postsLiveData.value = emptyList() // Clear existing posts
+            _postsLiveData.value = emptyList()  // Clear current posts for the new category
         }
-
-        _loadingLiveData.value = true
 
         viewModelScope.launch {
             try {
+                // Fetch new posts by category from repository
                 val newPosts = postRepository.getPostsByCategory(categoryId, currentPage)
+
+                // Get the current list of posts from LiveData
                 val currentPosts = _postsLiveData.value.orEmpty()
-                _postsLiveData.postValue(currentPosts + newPosts) // Append new posts to the existing list
-                currentPage++ // Increment page for next load
+
+                // Append new posts and sort by date (latest first)
+                val updatedPosts = (currentPosts + newPosts).distinctBy { it.id }  // Avoid duplicates
+                    .sortedByDescending { post -> post.date }
+
+                // Update LiveData with sorted posts
+                _postsLiveData.postValue(updatedPosts)
+
+                currentPage++  // Increment page for future fetches
             } catch (e: Exception) {
                 _errorLiveData.postValue("Error fetching posts: ${e.message}")
             } finally {
                 isLoading = false
-                _loadingLiveData.value = false
+                _loadingLiveData.value = false  // Hide loading indicator
             }
         }
     }
@@ -107,8 +149,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun fetchPostDetails(postId: Long) {
         viewModelScope.launch {
-            val postDetails = postRepository.getPostDetails(postId)
-            _postDetailsLiveData.postValue(postDetails)
+            try {
+                val postDetails = postRepository.getPostDetails(postId)
+                _postDetailsLiveData.postValue(postDetails)
+            } catch (e: Exception) {
+                _errorLiveData.postValue("Error fetching post details: ${e.message}")
+            }
         }
     }
 
@@ -120,6 +166,24 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun resetLoadingState() {
         isLoading = false
         _loadingLiveData.value = false
+    }
+
+    suspend fun getMatchingPosts(query: String): List<Post> {
+        return postRepository.searchPosts(query)  // You already have a search method in the repository
+    }
+
+    fun searchPosts(query: String) {
+        viewModelScope.launch {
+            _loadingLiveData.postValue(true)  // Show loader when fetching starts
+            try {
+                val posts = postRepository.searchPosts(query)
+                _searchResultsLiveData.postValue(posts)
+            } catch (e: Exception) {
+                _searchResultsLiveData.postValue(emptyList())
+            } finally {
+                _loadingLiveData.postValue(false)  // Hide loader when fetching ends
+            }
+        }
     }
 }
 

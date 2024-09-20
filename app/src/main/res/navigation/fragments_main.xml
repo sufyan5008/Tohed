@@ -64,6 +64,11 @@
         android:name="com.tohed.islampro.PostDetailsFragment"
         android:label="fragment_post_details"
         tools:layout="@layout/fragment_post_details" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.tohed.islampro.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/excerptFragment"

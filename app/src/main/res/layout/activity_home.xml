@@ -8,347 +8,364 @@
     android:background="@color/white"
     tools:context=".ui.activities.HomeActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="#673208"
         android:gravity="right"
         android:orientation="vertical"
-        android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <ImageView
             android:id="@+id/drawer_open_close"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_margin="10dp"
             android:layout_marginStart="15dp"
-            android:src="@drawable/setting" />
+            android:src="@drawable/setting"
+            app:tint="@color/white" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:background="@drawable/header_logo" />
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <!--<SearchView
+            android:id="@+id/searchView"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_view_bg"
+            android:iconifiedByDefault="false"
+            android:queryHint="تلاش کریں..."
+            android:theme="@style/CustomSearchView" />
+-->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="9dp">
 
-            <!---->
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clTopLayout"
+            <!-- EditText for Search Input -->
+            <EditText
+                android:id="@+id/search_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FBEFD7"
-                app:layout_constraintTop_toTopOf="parent">
+                android:background="@drawable/search_view_bg"
+                android:hint="تلاش کریں..."
+                android:padding="8dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="start|center_vertical"
+                android:fontFamily="@font/mehr_urdu_font" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="28dp"
-                    android:background="@drawable/home_sub_header_masjid_asr"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
-                <!--<androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivnight"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/baseline_bedtime_24"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--<androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivday"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/baseline_light_mode_24"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />-->
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/islam_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:paddingEnd="10dp"
-                    android:text="@string/app_name"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/img_bottom"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingPrefix" />
-
-                <LinearLayout
-                    android:id="@+id/ll1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/islam_date">
-                    <!--<androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/islamicYearTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato"
-                        android:text="@string/app_name"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/islam_date"
-                        tools:ignore="MissingPrefix" />-->
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/islam_hijri"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato"
-                        android:paddingEnd="10dp"
-                        android:text="@string/app_name"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black"
-                        android:textDirection="rtl"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/islam_date"
-                        tools:ignore="MissingPrefix" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:paddingEnd="10dp"
-                    android:text="@string/app_name"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/black"
-                    android:textDirection="rtl"
-                    android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll1"
-                    tools:ignore="MissingPrefix" />
-
-                <TextView
-                    android:id="@+id/now_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/uthaman_arabic"
-                    android:paddingStart="10dp"
-                    android:text="ابهی"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvNimazName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="start"
-                    android:fontFamily="@font/lato"
-                    android:maxLines="1"
-                    android:paddingStart="10dp"
-                    android:text="@string/app_name"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/now_et"
-                    tools:ignore="MissingPrefix" />
+            <!-- ImageView for Search Icon -->
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_search"
+                android:layout_alignEnd="@id/search_edit_text"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:tint="@color/gray" />
+        </RelativeLayout>
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvUpcoming"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:gravity="end"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:text="آنے والا"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNimazName"
-                    tools:ignore="MissingPrefix" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/upcomingPrayerTimeTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:gravity="start"
-                    android:paddingStart="10dp"
-                    android:text="@string/app_name"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvUpcoming" />
+        <!-- <androidx.cardview.widget.CardView
+             android:id="@+id/cardView"
+             android:layout_width="match_parent"
+             android:layout_height="150dp"
+             app:cardBackgroundColor="#673208"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent">-->
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvNimazTime"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/lato"
-                    android:gravity="start"
-                    android:maxLines="1"
-                    android:paddingStart="10dp"
-                    android:text="@string/app_name"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/upcomingPrayerTimeTv"
-                    tools:ignore="MissingPrefix" />
+        <!---->
+
+        <!--<androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTopLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FBEFD7"
+            app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/home_sub_header_masjid_asr"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/islam_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:paddingEnd="10dp"
+            android:text="@string/app_name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/img_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix" />
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/islam_date">-->
+
+        <!--<androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/islam_hijri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato"
+            android:paddingEnd="10dp"
+            android:text="@string/app_name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textDirection="rtl"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/islam_date"
+            tools:ignore="MissingPrefix" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:paddingEnd="10dp"
+        android:text="@string/app_name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textDirection="rtl"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll1"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/now_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/uthaman_arabic"
+        android:paddingStart="10dp"
+        android:text="ابهی"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNimazName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="start"
+        android:fontFamily="@font/lato"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:text="@string/app_name"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/now_et"
+        tools:ignore="MissingPrefix" />
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/home_sub_header_parallax_asr"
-                    android:scaleType="fitXY"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvNimazTime" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUpcoming"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:gravity="end"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:text="آنے والا"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNimazName"
+        tools:ignore="MissingPrefix" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/upcomingPrayerTimeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato"
+        android:gravity="start"
+        android:paddingStart="10dp"
+        android:text="@string/app_name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUpcoming" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNimazTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato"
+        android:gravity="start"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:text="@string/app_name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upcomingPrayerTimeTv"
+        tools:ignore="MissingPrefix" />
 
 
-            <!---->
-            <!--<LinearLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/home_sub_header_parallax_asr"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNimazTime" />-->
+        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <!---->
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium_numbers"
-                            android:text="11"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lato"
-                            android:textColor="@color/black"
-                            android:text="Shaban,1445"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
+                        android:fontFamily="@font/roboto_medium_numbers"
+                        android:text="11"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato"
                         android:textColor="@color/black"
-                        android:text="21 Feburary 2024"
+                        android:text="Shaban,1445"
                         android:textSize="12sp" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="50dp"
-                            android:background="@drawable/home_sub_header_masjid_asr"
-                            />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:background="@drawable/home_sub_header_parallax_asr"
-                            />
-                    </FrameLayout>
-                    </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/black_shade"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:background="@drawable/bg_gray_border_8"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/jameel_noori_nastaleeq"
-                    android:gravity="center|start"
-                    android:paddingStart="8dp"
-                    android:layout_gravity="bottom"
-                    android:paddingEnd="8dp"
-                    android:text="تلاش کریں"
-                    android:textAlignment="viewStart"
+                    android:fontFamily="@font/lato"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:drawableTint="@color/black"
-                    app:layout_constrainedWidth="true"
-                    tools:ignore="MissingPrefix" />
-            </LinearLayout>-->
+                    android:text="21 Feburary 2024"
+                    android:textSize="12sp" />
 
-        </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/home_sub_header_masjid_asr"
+                        />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/home_sub_header_parallax_asr"
+                        />
+                </FrameLayout>
+                </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/black_shade"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSearch"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_gray_border_8"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/jameel_noori_nastaleeq"
+                android:gravity="center|start"
+                android:paddingStart="8dp"
+                android:layout_gravity="bottom"
+                android:paddingEnd="8dp"
+                android:text="تلاش کریں"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:drawableTint="@color/black"
+                app:layout_constrainedWidth="true"
+                tools:ignore="MissingPrefix" />
+        </LinearLayout>-->
+
+        <!--
+                </androidx.cardview.widget.CardView>
+        -->
 
     </LinearLayout>
 
@@ -366,27 +383,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/fragments_main" />
-
-
-    <!--<androidx.cardview.widget.CardView
-        android:id="@+id/bt_cardV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">-->
-
-
-    <!--<com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_bar_menu" />-->
 
 
     <androidx.cardview.widget.CardView
@@ -470,7 +466,8 @@
                 android:background="@drawable/nav_full_rounded_btn"
                 android:backgroundTint="@color/transparent"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/createImg"

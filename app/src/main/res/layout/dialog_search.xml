@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/dialog_background">
+
+    <!-- Custom Title -->
+    <TextView
+        android:id="@+id/customDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="کوئی نتائج نہیں ملے"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/mehr_urdu_font" />
+
+    <!-- Custom Message -->
+    <TextView
+        android:id="@+id/customDialogMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="آپ کے تلاش کردہ الفاظ سے کوئی پوسٹ موجود نہیں، آپ تلاش کرتے وقت ایک لفظ لکھیں، جیسے ، عائشہ، یا اونٹ وغیرہ"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="@font/mehr_urdu_font" />
+
+</LinearLayout>

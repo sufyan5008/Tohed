@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background shape for the icon -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#8B4513" /> <!-- Brown background -->
+            <corners android:radius="10dp" /> <!-- Rounded corners -->
+        </shape>
+    </item>
+    <!-- Search icon (you can replace this with a custom icon if needed) -->
+    <item android:gravity="center">
+        <bitmap android:src="@drawable/ic_search" android:tint="#FFD700" /> <!-- Golden search icon -->
+    </item>
+</layer-list>

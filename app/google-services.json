@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "193934623043",
+    "project_id": "tohed-f205a",
+    "storage_bucket": "tohed-f205a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193934623043:android:46fc4413089f4536f4aff6",
+        "android_client_info": {
+          "package_name": "com.tohed.islampro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9bM1Mkk8RCjvS_kxONK0-NNUr1W4Y17k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,6 +25,10 @@ interface PostDao {
 
     @Query("SELECT * FROM pages WHERE id = :pageId")
     fun getPageById(pageId: Int): PageEntity?
+
+    @Query("SELECT * FROM posts WHERE title LIKE '%' || :query || '%'")
+    fun searchPostsByTitle(query: String): List<PostEntity>
+
 }
 
 /*@Dao

@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/icon_tint"
+            android:textColor="#954B14"
             android:text="اسکرین شاٹ منسلک کریں۔"/>
     </LinearLayout>
     <!-- Submit Button -->

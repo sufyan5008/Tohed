@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostDetailsFragment">
-
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -16,8 +13,8 @@
         android:background="@drawable/nav_full_rounded_btn"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,80 +45,76 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/titleTextView"
+                    android:id="@+id/search_text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/mehr_urdu_font"
                     android:gravity="center"
-                    android:text="نئے مضامین"
+                    android:text="آپ کی تلاش"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="23sp" />
 
+                <TextView
+                    android:id="@+id/search_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/search_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/mehr_urdu_font"
+                    android:gravity="center"
+                    android:text="کے نتائج"
+                    android:textColor="@color/white"
+                    android:textSize="23sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <WebView
-        android:id="@+id/contentWebView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/ll1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_view" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/loadingTextv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/mehr_urdu_font"
+        android:padding="@dimen/_40sdp"
+        android:textSize="18sp"
+        android:textColor="@color/gray"
         android:visibility="gone"
+        android:text="آپ کا مطلوبہ کی ورڈ توحید ڈاٹ کام کے ڈیٹابیس میں تلاش کیا جارہا ہے، اس تلاش میں چند منٹس درکار ہیں، براہ مہربانی یہ صفحہ یا ایپلیکشن بند نہ کریں۔"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/ll1"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentWebView">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" /> <!-- Initially hidden -->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="یہ پوسٹ اپنے دوست احباب کیساتھ شئیر کریں۔"
-            android:fontFamily="@font/mehr_urdu_font"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="@color/card_border"/>
-        <TextView
-            android:id="@+id/fab_copy"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="wrap_content"
-            android:background="@color/blue_dark"
-            android:contentDescription="Copy"
-            android:textAlignment="center"
-            android:drawableEnd="@drawable/baseline_copy_all_24"
-            android:fontFamily="@font/mehr_urdu_font"
-            android:padding="@dimen/_5sdp"
-            android:textSize="18sp"
-            android:text="کاپی ٹو کلپ بورڈ"
-            android:textColor="@color/white"
-            app:fabSize="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contentWebView" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
